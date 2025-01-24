@@ -2791,12 +2791,28 @@ public enum Command implements ConfigConstants {
                 conf.set(protocolName, "TLSv1.1");
             } else if ("TLSv1.2".equalsIgnoreCase(arg)) {
                 conf.set(protocolName, "TLSv1.2");
+            } else if ("TLSv1.3".equalsIgnoreCase(arg)) {
+                conf.set(protocolName, "TLSv1.3");
             } else {
                 throw new IllegalArgumentException(
                     "Unrecognized option argument for " + option
                         + ": " + arg);
             }
+            if(LOG.isDebugEnabled()) {
+                LOG.debug("Using SSL Protocol " + arg + " for " + protocolName);
+            }
+        } else if(LOG.isDebugEnabled() && isSslEnabled(conf, protocolName)) {
+            LOG.debug("Using default SSL Protcol for " + protocolName);
         }
+    }
+
+    static boolean isSslEnabled(Configuration conf, String protocolName) {
+        if(protocolName.equals(MarkLogicConstants.OUTPUT_SSL_PROTOCOL)) {
+            return conf.getBoolean(MarkLogicConstants.OUTPUT_USE_SSL, false);
+        } else if(protocolName.equals(MarkLogicConstants.INPUT_SSL_PROTOCOL)) {
+            return conf.getBoolean(MarkLogicConstants.INPUT_USE_SSL, false);
+        }
+        return false;
     }
 
     public void printUsage(Command cmd, Options options) {
