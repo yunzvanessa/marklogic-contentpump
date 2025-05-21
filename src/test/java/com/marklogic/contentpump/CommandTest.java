@@ -37,7 +37,7 @@ public class CommandTest {
 
   @Test
   public void setProtocol() {
-    String[] values = {"TLS", "TLSv1", "TLSv1.1", "TLSv1.2", "TLSv1.3"};
+    String[] values = {"TLSv1.2", "TLSv1.3"};
     //verify each of the supported protocols
     for (String value : values) {
       Configuration conf = setProtocol(value);

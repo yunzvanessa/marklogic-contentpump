@@ -2783,13 +2783,7 @@ public enum Command implements ConfigConstants {
     static void applyProtocol(Configuration conf, CommandLine cmdline, String option, String protocolName) {
         if (cmdline.hasOption(option)) {
             String arg = cmdline.getOptionValue(option);
-            if ("TLS".equalsIgnoreCase(arg)) {
-                conf.set(protocolName, "TLS");
-            } else if ("TLSv1".equalsIgnoreCase(arg)) {
-                conf.set(protocolName, "TLSv1");
-            } else if ("TLSv1.1".equalsIgnoreCase(arg)) {
-                conf.set(protocolName, "TLSv1.1");
-            } else if ("TLSv1.2".equalsIgnoreCase(arg)) {
+            if ("TLSv1.2".equalsIgnoreCase(arg)) {
                 conf.set(protocolName, "TLSv1.2");
             } else if ("TLSv1.3".equalsIgnoreCase(arg)) {
                 conf.set(protocolName, "TLSv1.3");
